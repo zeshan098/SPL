@@ -47,9 +47,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth',  'middleware' => 'ro
 });
 
 // FM Route
-Route::group(['prefix' => 'fm',  'middleware' => 'auth',  'middleware' => 'role:admin,fm'], function(){
+Route::group(['prefix' => 'fm',  'middleware' => 'auth',  'middleware' => 'role:admin,fm', 'as' => 'fm.'], function(){
     Route::get('unapproved_list', 'FmController@index')->name('unapproved_list');
     Route::get('create_case', 'FmController@create_case')->name('create_case');
     Route::post('store', 'FmController@store')->name('store');
-    //Route::get('show', 'FmController@show')->name('show');
+    Route::get('show', 'FmController@show')->name('show');
 });

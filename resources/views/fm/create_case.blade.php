@@ -8,7 +8,7 @@
 <!-- Main content -->
 <section class="content">
     <!--tab1 -->
-    <form method="post" action="{{ url('store') }}">
+    <form method="post" action="{{ route('fm.store') }}">
     <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="row">
         <div class="col-xs-12">
@@ -35,8 +35,9 @@
                     <div class="form-group">
                     <label>Select Zone</label>
                         <select name="zone" class="form-control">
-                            <option>Zone 1</option>
-                            <option>Zone 2</option>
+                               @foreach(explode(",", $case->zone) as $key => $value)
+                                    <option value="{{$value}}">{{$value}}</option>
+                                @endforeach
                         </select>
                     </div>
                 </div>
@@ -44,8 +45,9 @@
                     <div class="form-group">
                     <label>Select District</label>
                         <select name="district" class="form-control">
-                            <option>Zone 1</option>
-                            <option>Zone 2</option>
+                            @foreach(explode(",", $case->district) as $key => $value)
+                              <option value="{{$value}}">{{$value}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -53,8 +55,9 @@
                     <div class="form-group">
                     <label>Select Station</label>
                         <select name="station" class="form-control">
-                            <option>Zone 1</option>
-                            <option>Zone 2</option>
+                            @foreach(explode(",", $case->station) as $key => $value)
+                              <option value="{{$value}}">{{$value}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -94,13 +97,13 @@
                 <div class="row">
                         <div class="col-xs-12">
                         <label class="radio-inline">
-                        <input type="radio" name="salutation" value="" checked>Dr
+                        <input type="radio" name="salutation" value="GP" checked>GP
                         </label>
                         <label class="radio-inline">
-                        <input type="radio" name="salutation" value="">MO
+                        <input type="radio" name="salutation" value="MO">MO
                         </label>
                         <label class="radio-inline">
-                        <input type="radio" name="salutation" value="">Consultant
+                        <input type="radio" name="salutation" value="Consultant">Consultant
                         </label>
                         
                     
@@ -117,13 +120,13 @@
                 <div class="row">
                     <div class="col-xs-8">
                         <label class="radio-inline">
-                          <input type="radio" name="ppb" value="" checked>Precriber
+                          <input type="radio" name="ppb" value="Prescriber" checked>Prescriber
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="ppb" value="" >Purchaser
+                          <input type="radio" name="ppb" value="Purchaser" >Purchaser
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="ppb" value="">Both
+                          <input type="radio" name="ppb" value="Both">Both
                         </label>
                         
                     
@@ -167,7 +170,7 @@
                         </div>
                         <div class="col-xs-4">
                         <label>SPB Amt</label>
-                            <input class="form-control" type="text" name="spb_amt" placeholder="SPB Amt" required>
+                            <input class="form-control" type="text" name="spb_amount" placeholder="SPB Amt" required>
                         </div>
                     </div>
                     <br>

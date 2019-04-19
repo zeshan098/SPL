@@ -86,7 +86,7 @@ class LoginController extends Controller
             }
         }
         else{
-            dd('zeshan2');
+           
             return redirect()->back()->with('error', 'Incorrect User or Password!');
         }
     }
