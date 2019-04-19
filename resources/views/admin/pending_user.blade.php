@@ -11,7 +11,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Table With Full Features</h3>
+                    <h3 class="box-title">Pending User</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -22,7 +22,6 @@
                                 <th>CCrsid</th>
                                 <th>Role</th>
                                 <th>Email</th>
-                                <th>Contact</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -31,13 +30,12 @@
                         @foreach($users as $user_record)
                             <tr>
                             
-                                <td>{{ $user_record->name}}</td>
+                                <td>{{ $user_record->name }}</td>
                                 <td>{{ $user_record->ccrsid }}</td>
                                 <td>{{ $user_record->role }}</td>
                                 <td>{{ $user_record->email }}</td>
-                                <td>{{ $user_record->contact }}</td>
                                 <td>{{ $user_record->is_approved ? "Approved" : "Pending" }}</td>
-                                <td><a href="{{route('delete_user',$user_record->id)}}"><i class="fa fa-trash fa-2" aria-hidden="true"></i></a></td>
+                                <td><a href="{{route('update_pending_user',$user_record->id)}}"><i class="fa fa-check fa-2" aria-hidden="true"></i></a></td>
                             
                             </tr>
                         @endforeach
@@ -48,7 +46,6 @@
                                 <th>CCrsid</th>
                                 <th>Role</th>
                                 <th>Email</th>
-                                <th>Contact</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>

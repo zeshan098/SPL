@@ -33,17 +33,15 @@
             <!-- Optionally, you can add icons to the links -->
 <!--            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Users Management</span></a></li>
             <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>-->
-            <li class="{{ $controller_name == "UserController" ? 'active' : '' }} treeview">
-                <a href="#"><i class="fa fa-group"></i> <span>Users Management</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+            <!-- <li class="{{ ($controller_name == "FmController" && $action_name == "index") ? 'active' : '' }}">
+                <a href="{{ url('fm/unapproved_list') }}"><i class="fa fa-group"></i> <span>Pending Cases</span>
+                    
                 </a>
-                <ul class="treeview-menu">
-                    <li class="{{ $action_name == "add_user_view" ? 'active' : '' }}"><a href="{{ url('admin/add_user') }}">Add New</a></li>
-                    <li class="{{ $action_name == "users" ? 'active' : '' }}"><a href="{{ url('admin/users') }}">Approved Users</a></li>
-                    <li class="{{ $action_name == "pending_user" ? 'active' : '' }}"><a href="{{ url('admin/pending_user') }}">Pending User</a></li>
-                </ul>
+            </li> -->
+            <li class="{{ $controller_name == "FmController" && $action_name == "create_case" ? 'active' : '' }}">
+                <a href="{{ url('fm/create_case') }}"><i class="fa fa-group"></i> <span>Create Case</span>
+                    
+                </a>
             </li>
         </ul>
         <!-- /.sidebar-menu -->

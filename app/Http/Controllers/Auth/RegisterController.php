@@ -76,8 +76,7 @@ class RegisterController extends Controller
     {
 //        dd($request);
         if(User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
+            'name' => $request->input('name'),
             'email' => $request->input('email'),
             'ccrsid' => $request->input('ccrsid'),
             'password' => Hash::make($request->input('password')),

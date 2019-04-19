@@ -22,13 +22,10 @@
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" required="">
+                        <label for="first_name">Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" required="">
                     </div>
-                    <div class="form-group">
-                        <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required="">
-                    </div>
+                    
                     <div class="form-group">
                         <label for="ccrsid">CCRSID</label>
                         <input type="text" class="form-control" name="ccrsid" id="ccrsid" placeholder="CCRSID" required="">

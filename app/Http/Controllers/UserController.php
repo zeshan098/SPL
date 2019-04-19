@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -40,10 +41,11 @@ class UserController extends Controller
     }
     
     public function users(){
-        $data["users"] = array();
         $data['page_title'] = "Users List";
         $data['page_description'] = "Users List";
-        return view('admin.users')->with($data);
+        $user_record = \DB::table('users')->where("is_deleted", "=" , 0)->where("is_approved", "=" , 1)->get();
+        $data['users'] = $user_record;
+        return view('admin.users') ->with($data);
     }
     
     public function add_user_view(){
@@ -52,6 +54,13 @@ class UserController extends Controller
         $data['page_description'] = "Add User";
         return view('admin.add_user')->with($data);
     }
+
+    public function delete_user($id){
+        $user_delete_update = User::find($id);
+        $user_delete_update->is_deleted = 1;
+        $user_delete_update->save();
+        return redirect()->route('list_users');
+    }
     
     public function add_user_post(Request $request){
         dd($request);
@@ -59,5 +68,19 @@ class UserController extends Controller
         $data['page_title'] = "Add User";
         $data['page_description'] = "Add User";
         return view('admin.add_user')->with($data);
+    }
+
+    public function pending_user(){
+        $data['page_title'] = "Pending User";
+        $user_record = \DB::table('users')->where("is_deleted", "=" , 0)->where("is_approved", "=" , 0)->get();
+        $data['users'] = $user_record;
+        return view('admin.pending_user') ->with($data);
+    }
+
+    public function update_pending_user($id){
+        $pending_user_update = User::find($id);
+        $pending_user_update->is_approved = 1;
+        $pending_user_update->save();
+        return redirect()->route('pending_user');
     }
 }

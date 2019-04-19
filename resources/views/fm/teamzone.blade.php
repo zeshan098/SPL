@@ -1,4 +1,4 @@
-@extends('admin.template.admin_template')
+@extends('fm.template.admin_template')
 
 
 
@@ -28,19 +28,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user_record)
-                            <tr>
-                            
-                                <td>{{ $user_record->name}}</td>
-                                <td>{{ $user_record->ccrsid }}</td>
-                                <td>{{ $user_record->role }}</td>
-                                <td>{{ $user_record->email }}</td>
-                                <td>{{ $user_record->contact }}</td>
-                                <td>{{ $user_record->is_approved ? "Approved" : "Pending" }}</td>
-                                <td><a href="{{route('delete_user',$user_record->id)}}"><i class="fa fa-trash fa-2" aria-hidden="true"></i></a></td>
-                            
-                            </tr>
-                        @endforeach
+                        <tr>
+                        <td>zeshan</td>
+                        <td>zeshan</td>
+                        <td>zeshan</td>
+                        <td>zeshan</td>
+                        <td>zeshan</td>
+                        </tr>
+                     
                         </tbody>
                         <tfoot>
                             <tr>
