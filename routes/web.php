@@ -36,7 +36,7 @@ Route::post('password/reset', ['as' => 'password.reset.post', 'uses' => 'Auth\Re
 Route::group(['prefix' => 'admin',  'middleware' => 'auth',  'middleware' => 'role:admin'], function() {
     //Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/', function () {
-        return view('admin_template');
+        return redirect()->route('login');
     });
     Route::get('users', 'UserController@users')->name('list_users');
     Route::get('add_user', 'UserController@add_user_view')->name('add_user');

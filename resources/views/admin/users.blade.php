@@ -11,10 +11,11 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Table With Full Features</h3>
+                    <h3 class="box-title">Users List</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body table-responsive">
+                <!--<div class="box-body table-responsive no-padding">-->
                     <table id="users_list" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -85,7 +86,16 @@
 <!-- page script -->
 <script>
     $(function () {
-        $('#users_list').DataTable();
+        $('#users_list').DataTable({
+            responsive: true,
+            autoWidth: false,
+            "scrollX": true,
+        });
     });
+//    $(document).ready(function(){
+//        $(window, ".content-wrapper").resize(_.debounce(function () {
+//             _this.fix();
+//            _this.fixSidebar(); }, 250));  
+//    });
 </script>
 @endsection

@@ -14,7 +14,8 @@
                     <h3 class="box-title">Pending User</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body table-responsive">
+                <!--<div class="box-body table-responsive no-padding">-->
                     <table id="users_list" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -82,7 +83,11 @@
 <!-- page script -->
 <script>
     $(function () {
-        $('#users_list').DataTable();
+        $('#users_list').DataTable({
+            responsive: true,
+            autoWidth: false,
+            "scrollX": true,
+        });
     });
 </script>
 @endsection

@@ -179,6 +179,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="{{ asset("bower_components/admin-lte/dist/js/adminlte.min.js") }}"></script>
 
         @yield('scripts')
+        
+<!--        <script type="text/javascript">
+            $(window).load(function() {
+                setTimeout(function() {
+                    $('body').layout('fix');
+                    $('body').layout('fixSidebar');
+                }, 250);
+            });
+        </script>-->
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
              Both of these plugins are recommended to enhance the
