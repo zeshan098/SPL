@@ -1543,10 +1543,11 @@ class FmController extends Controller
             $relation->save(); 
         }
          
-    return redirect('fm/fm_team_list');   
+     return redirect('fm/fm_team_list');   
     }
 
-    public function monthly_work_plan(){
+    public function monthly_work_plan()
+    {
         $ccrsid = Auth::user()->ccrsid;
         $todayDate = date("Y-m-d");  
         $zmccrsid = \DB::table('absents')
