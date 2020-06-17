@@ -3,8 +3,9 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html style="background-color: #ecf0f5;">
+<html>
     <head>
+    
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Login</title>
@@ -31,7 +32,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+        <style>
+         
+        .login-page{
+                background-image: url("/image/spl_build.jpg"); 
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: auto !important; 
+                min-height: 100% !important;
+                }
+                .login-box-body{background:none}
+                .login-box-msg{color:white}
+        </style>
     </head>
     <!--
     BODY TAG OPTIONS:
@@ -53,8 +66,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     |               | sidebar-mini                            |
     |---------------------------------------------------------|
     -->
-    <body class="hold-transition skin-blue sidebar-mini">
-        <div class="wrapper" style="background-color: #ecf0f5 !important;">
+    <body>
+        <div class="wrappers"  >
 
             <!-- Main Header -->
             
@@ -76,6 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!--------------------------
                     | Your Page Content Here |
                     -------------------------->
+                     
                     @yield('content')
                 </section>
                 <!-- /.content -->

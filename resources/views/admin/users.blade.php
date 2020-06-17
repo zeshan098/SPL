@@ -38,12 +38,13 @@
                                 <td>{{ $user_record->email }}</td>
                                 <td>{{ $user_record->contact }}</td>
                                 <td>{{ $user_record->is_approved ? "Approved" : "Pending" }}</td>
-                                <td><a href="{{route('delete_user',$user_record->id)}}"><i class="fa fa-trash fa-2" aria-hidden="true"></i></a></td>
+                                <td><a href="{{route('delete_user',$user_record->id)}}"><i class="fa fa-trash fa-2" aria-hidden="true"></i></a> | 
+                                <a href="{{route('update_password',$user_record->id)}}"><i class="fa fa-key fa-2" aria-hidden="true"></i></a></td>
                             
                             </tr>
                         @endforeach
                         </tbody>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
                             <th>Name</th>
                                 <th>CCrsid</th>
@@ -53,7 +54,7 @@
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -97,5 +98,33 @@
 //             _this.fix();
 //            _this.fixSidebar(); }, 250));  
 //    });
+</script>
+<script>
+         
+         setTimeout(function () {
+             location.reload();
+         }, 5000);
+     </script>
+     <script>
+  @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch(type){
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+        
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+  @endif
 </script>
 @endsection

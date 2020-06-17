@@ -39,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+       // $this->middleware('guest');
     }
 
     /**
@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'contact' => $request->input('contact'),
             'role' => $request->input('role'),
         ])){
-            return redirect('/admin/users');
+            return redirect('/admin/add_escalation_detail');
         }
     }
 }

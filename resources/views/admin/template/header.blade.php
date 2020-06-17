@@ -5,7 +5,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>S</b>PL</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Standpharm</b>LTD</span>
+        <span class="logo-lg"><b>Standpharm</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -120,7 +120,7 @@
                         <!-- The user image in the navbar-->
                         <img src="{{ asset("bower_components/admin-lte/dist/img/user-512-160x160.png") }}" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                        <span class="hidden-xs">{{ Auth::user()->name }} / Admin</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->

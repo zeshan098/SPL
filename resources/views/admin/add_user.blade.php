@@ -88,4 +88,5 @@ $(function () {
     $('#users_list').DataTable();
 });
 </script>
+
 @endsection

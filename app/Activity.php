@@ -11,6 +11,7 @@ class Activity extends Model
     
 
     protected $fillable = [
-        'product', 'spb_amt', 'current_biz', 'proj_biz', 'tot_proj', 'cost_of_activity'
+        'product', 'spb_amt', 'current_biz', 'proj_biz', 'tot_proj', 'cost_of_activity',
+        'rate'
     ];
 }

@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>CCrsid</th>
+                                <th>CCRSID</th>
                                 <th>Role</th>
                                 <th>Email</th>
                                 <th>Status</th>
@@ -41,7 +41,7 @@
                             </tr>
                         @endforeach
                         </tbody>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
                             <th>Name</th>
                                 <th>CCrsid</th>
@@ -50,7 +50,7 @@
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                     </table>
                 </div>
                 <!-- /.box-body -->

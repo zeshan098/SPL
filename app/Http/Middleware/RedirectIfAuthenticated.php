@@ -37,13 +37,13 @@ class RedirectIfAuthenticated
                 return redirect()->intended('fm/create_case');
             }
             else if(Auth::user()->role == "zm"){
-                return redirect()->intended('zm/unapproved_list');
+                return redirect()->intended('zm/case_lists');
             }
             else if(Auth::user()->role == "nsm"){
-                return redirect()->intended('nsm/unapproved_list');
+                return redirect()->intended('nsm/case_lists');
             }
             else if(Auth::user()->role == "pm"){
-                return redirect()->intended('pm/unapproved_list');
+                return redirect()->intended('pm/case_lists');
             }
             else{
                 Auth::logout();

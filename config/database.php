@@ -87,6 +87,18 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'oracle' => array(
+            'driver' => 'oracle',
+            'tns' => '(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.10.1.5)(PORT = 1521))) (CONNECT_DATA = (SERVICE_NAME = orcl)))',
+            //'host' => '192.168.152.189',// this is my server IP
+            //'port' => '1521',
+            'database' => 'orcl',
+            'username' => 'LE02',
+            'password' => 'LE02',
+            'charset' => 'AL32UTF8',
+            'prefix' => '',
+        ),
+
     ],
 
     /*
