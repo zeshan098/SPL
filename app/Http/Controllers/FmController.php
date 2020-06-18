@@ -19,6 +19,7 @@ use App\Fm_Other_info;
 use App\Fm_Payment_info;
 use App\Fm_Relative_in_Pharma_info;
 use App\Fm_Team_info;
+use App\MSO_Work_Plan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -1566,6 +1567,88 @@ class FmController extends Controller
         $data['page_title'] = "Add Monthlhy Plan";
         return view('fm.fm_schedule.fm_monthly_work_plan')->with($data)
         ->with('zmccrsid', $absent_id);
+    }
+
+
+    public function mso_work_plan_store(Request $request){
+         
+        $ccrsid = Auth::user()->ccrsid; 
+        foreach($request->input('date') as $key => $mso_id){
+            $mso_id = new MSO_Work_Plan;
+            
+            $date = str_replace('/', '-',$request->input('date')[$key]);
+            $newDate = date("Y-m-d", strtotime($date));
+            $mso_id->date = $newDate;
+            $mso_id->area = $request->input('area')[$key];
+            $mso_id->mso_id = $request->input('mso_name')[$key];
+            $mso_id->contact_point = $request->input('contact_point')[$key];
+            $mso_id->time = $request->input('time')[$key];
+            $mso_id->fm_id =$ccrsid;
+            $mso->status = '1';
+            $mso_id->save();
+        }
+        return redirect('fm/monthly_work_plan');
+    }
+
+    public function view_mso_plan(){
+        $ccrsid = Auth::user()->ccrsid;
+        $todayDate = date("Y-m-d");  
+        $zmccrsid = \DB::table('absents')
+                    ->select('absent_ccrsid')
+                    ->where('assign_ccrsid', $ccrsid)
+                    ->where(TRIM('absents.from_date'), '<=', TRIM($todayDate))
+                    ->where(TRIM('absents.to_date'), '>=', TRIM($todayDate))->first();    
+         
+        if($zmccrsid == null){
+             
+            $absent_id = 0;
+        }else{
+        
+            $absent_id = $zmccrsid->absent_ccrsid;
+        }
+        $data['page_title'] = "View MSO Plan";
+        return view('fm.fm_schedule.view_mso_pan')->with($data)
+        ->with('zmccrsid', $absent_id);
+    }
+
+    public function mso_plan(Request $request){
+         
+        $ccrsid = Auth::user()->ccrsid; 
+        $todayDate = date("Y-m-d");  
+        $zmccrsid = \DB::table('absents')
+                    ->select('absent_ccrsid')
+                    ->where('assign_ccrsid', $ccrsid)
+                    ->where(TRIM('absents.from_date'), '<=', TRIM($todayDate))
+                    ->where(TRIM('absents.to_date'), '>=', TRIM($todayDate))->first();    
+         
+        if($zmccrsid == null){
+             
+            $absent_id = 0;
+        }else{
+        
+            $absent_id = $zmccrsid->absent_ccrsid;
+        }
+
+        $date = str_replace('/', '-',$request->input('from_date') );
+        $from_date = date("Y-m-d", strtotime($date));
+
+        $dates = str_replace('/', '-',$request->input('to_date') );
+        $to_date = date("Y-m-d", strtotime($dates));
+
+        $mso_id = $request->input('mso_id');
+
+        $mso_lists = DB::select("select * from mso_work_plans
+                                    where date BETWEEN '".$from_date."'  And  '".$to_date."'
+                                    and mso_id = $mso_id
+                                    and status = '1'
+                                    order by id ASC "); 
+         
+        $data['mso_lists'] = $mso_lists;
+        
+        return view('fm.fm_schedule.mso_plan')->with($data)
+               ->with('mso_lists', $mso_lists)
+               ->with('zmccrsid', $absent_id);
+
     }
 
 }

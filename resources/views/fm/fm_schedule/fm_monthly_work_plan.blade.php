@@ -19,6 +19,8 @@
     <div class="row">
       <div class="col-md-12">
     <!-- /.tab-pane -->
+    <form method="post"  action="{{ url('fm/mso_work_plan_store') }}"  enctype="multipart/form-data">
+        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
        <div class="tab-pane" id="tab_3">
                 <!-- /.box-body -->
                 <div class="box-body">
@@ -29,7 +31,7 @@
                       <div class="col-lg-2 nopadding">
                        <div class="form-group">
                         <label>Date</label>
-                        <input type="text" class="form-control datepicker" id="date" name="date[]" value="" >
+                        <input type="text" class="form-control datepicker" id="date" name="date[]" value=""  autocomplete="off">
                         
                       </div>
                     </div>
@@ -45,7 +47,12 @@
                     <div class="col-lg-2 nopadding">
                        <div class="form-group">
                         <label>MSO Name</label>
-                        <input type="text" class="form-control" id="mso_name" name="mso_name[]" value="" >
+                        <select name="mso_name[]" class="form-control">
+                          <option value="" selected>Select MSO</option> 
+                            <option value="1101">1101</option>
+                            <option value="1102">1102</option>
+                          
+                          </select>
                         
                       </div>
                     </div>
@@ -77,11 +84,13 @@
                     </div>         
                   </div>
                 </div> 
-                <button type="submit" name="submit" value="1" id="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit" value="1" id="submit" style="float: right; margin: 8px 9px 2px 8px;" class="btn btn-primary">Submit</button>
                 <!-- /.box-body -->
             </div>
               <!-- /.tab-pane -->
+          
         </div>
+        </form>
        </div>
     </div>
     </div>
@@ -186,7 +195,7 @@ function education_fields() {
      
     divtest.innerHTML = `<div class="col-lg-2 nopadding">
                               <div class="form-group" >
-                                <input type="text" class="form-control datepicker" id="date" name="date[]" value="" >
+                                <input type="text" class="form-control datepicker" id="date" name="date[]" value="" autocomplete="off">
                                </div>
                             </div>
                             <div class="col-lg-2 nopadding">
@@ -196,7 +205,12 @@ function education_fields() {
                             </div>
                             <div class="col-lg-2 nopadding">
                               <div class="form-group"> 
-                                <input type="text" class="form-control" id="mso_name" name="mso_name[]" value="" >
+                              <select name="mso_name[]" class="form-control">
+                                <option value="" selected>Select MSO</option> 
+                                  <option value="1101">1101</option>
+                                  <option value="1102">1102</option>
+                              
+                              </select>
                               </div>
                             </div>
                             <div class="col-lg-3 nopadding">

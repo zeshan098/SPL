@@ -129,6 +129,10 @@ Route::group(['prefix' => 'fm',  'middleware' => 'auth',  'middleware' => 'role:
 
 //FM Monthly Plan
     Route::get('monthly_work_plan', 'FmController@monthly_work_plan')->name('monthly_work_plan');
+    Route::post('mso_work_plan_store', 'FmController@mso_work_plan_store')->name('mso_work_plan_store');
+    
+    Route::get('view_mso_plan', 'FmController@view_mso_plan')->name('view_mso_plan');
+    Route::post('mso_plan', 'FmController@mso_plan')->name('mso_plan');
 });
 
 // ZM Route
