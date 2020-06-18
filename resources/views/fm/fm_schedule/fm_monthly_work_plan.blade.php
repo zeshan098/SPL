@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="{{ asset("bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css") }}">
 <link rel="stylesheet" href="{{ asset("bower_components/toaster/custom.css") }}">
 
-<link type="text/css" href="css/bootstrap-timepicker.min.css" />
 <!-- Main content -->
 <section class="content">
           <div class="box box-primary">
@@ -51,7 +50,7 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-4 nopadding">
+                    <div class="col-lg-3 nopadding">
                        <div class="form-group">
                         <label>Contact Point</label>
                         <input type="text" class="form-control" id="contact_point" name="contact_point[]" value="" >
@@ -60,11 +59,13 @@
                     </div>
 
 
-                    <div class="col-lg-2 nopadding">
+                    <div class="col-lg-3 nopadding">
                       <div class="form-group">
                       <label>Time</label>
-                        <div class="input-group">
+                        <div class='input-group date datetimepicker3' id='datetimepicker3'>
                           <input type="text" class="form-control" id="time" name="time[]" value="" >
+                          <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-time"></span></span>
                           <div class="input-group-btn">
                             <button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
                           </div>
@@ -107,7 +108,9 @@
 <!-- page script -->
 <script src="{{ asset("bower_components/datepicker/bootstrap-datepicker.min.js") }}"></script>
 <script src="{{ asset("bower_components/datepicker/daterangepicker.js") }}"></script>
- 
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script> -->
+<script src="{{ asset("bower_components/moment/moment.js") }}"></script> 
+<script src="{{ asset("bower_components/datepicker/bootstrap-datetimejs.js") }}"></script>   
 <script>
     $(function () {
         $('#users_list').DataTable({
@@ -115,17 +118,25 @@
             autoWidth: false,
             "scrollX": true,
         });
+       
     });
 </script>
 <script>
 //Date picker
-
+$(function () {
     $('.datepicker').datepicker({
         format: 'dd-mm-yyyy',
         todayHighlight:'TRUE',
         startDate: '-0d',
         autoclose: true,
     })
+    $('.datetimepicker3').datetimepicker({
+			format: 'LT'
+		});
+		$('.datetimepicker3').datetimepicker({
+			format: 'LT'
+        });
+    });
 </script>
  
 <script>
@@ -135,26 +146,44 @@ function education_fields() {
     room++;
     var objTo = document.getElementById('education_fields')
     var divtest = document.createElement("div");
-	divtest.setAttribute("class", "form-group removeclass"+room);
-	var rdiv = 'removeclass'+room;
+	  divtest.setAttribute("class", "form-group removeclass"+room);
+	  var rdiv = 'removeclass'+room;
     
-    $('#education_fields').on('click', function() {      
-            $(".datepicker").on('focus', function(){
-            var $this = $(this);
-            if(!$this.data('datepicker')) {
-                $('.datepicker').datepicker({
-                format: 'dd-mm-yyyy',
-                todayHighlight:'TRUE',
-                startDate: '-0d',
-                autoclose: true,
+    $('#education_fields').on('click', function() {  
+      var $row = $(this).closest("div");    
+      $(".datepicker").on('focus', function(){
+        var $this = $(this);
+          if(!$this.data('datepicker')) {
+              $('.datepicker').datepicker({
+              format: 'dd-mm-yyyy',
+              todayHighlight:'TRUE',
+              startDate: '-0d',
+              autoclose: true,
             })
-            $this.removeClass("hasDatepicker");
-            $this.datepicker();
-            $this.datepicker("show");
+          $this.removeClass("hasDatepicker");
+          $this.datepicker();
+          $this.datepicker("show");
+
+         }
+            
+        }); 
+    
+        
+            var $thiss = $(this).closest("div"); 
+            if(!$thiss.data('datetimepicker3')) {
+                $('.datetimepicker3').datetimepicker({
+			     format: 'LT'
+            });
+            $('.datetimepicker3').datetimepicker({
+                format: 'LT'
+            });
+
             }
             
         });
-     });
+   
+
+     
     divtest.innerHTML = `<div class="col-lg-2 nopadding">
                               <div class="form-group" >
                                 <input type="text" class="form-control datepicker" id="date" name="date[]" value="" >
@@ -170,16 +199,19 @@ function education_fields() {
                                 <input type="text" class="form-control" id="mso_name" name="mso_name[]" value="" >
                               </div>
                             </div>
-                            <div class="col-lg-4 nopadding">
+                            <div class="col-lg-3 nopadding">
                                 <div class="form-group"> 
                                     <input type="text" class="form-control" id="contact_point" name="contact_point[]" value="" >
                                 </div>
                             </div>
-                            <div class="col-lg-2 nopadding">
+                            <div class="col-lg-3 nopadding">
                               <div class="form-group">
-                                <div class="input-group">
+                                <div class='input-group date datetimepicker3' id='datetimepicker3'>
                                 <input type="text" class="form-control" id="time" name="time[]" value="" >
-                                  <div class="input-group-btn">
+                                <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-time"></span>
+                                </span>  
+                                <div class="input-group-btn">
                                   <button class="btn btn-danger" type="button" onclick="remove_education_fields(` + room + `);"> 
                                                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> 
                                   </button>
@@ -195,6 +227,7 @@ function education_fields() {
 	   $('.removeclass'+rid).remove();
    }
 </script>
+ 
 <script>
   @if(Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}";
