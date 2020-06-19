@@ -1651,4 +1651,22 @@ class FmController extends Controller
 
     }
 
+    public function edit_mso_plan(Request $request){
+        $date = str_replace('/', '-',$request->input('date') );
+        $newDate = date("Y-m-d", strtotime($date));
+        $update_vendor = DB::table('mso_work_plans')->where('id', $request->input('id'))
+                            ->update(['date'=> $newDate,
+                                      'area'=> $request->input('area'),
+                                      'mso_id' => $request->input('mso_id'),
+                                      'contact_point' => $request->input('contact_point'), 
+                                      'time' => $request->input('time')]);
+        
+        $update_plan = \DB::table('mso_work_plans')
+                        ->Select('mso_work_plans.id', 'mso_work_plans.date','mso_work_plans.area',
+                        'mso_work_plans.mso_id','mso_work_plans.contact_point','mso_work_plans.time')
+                        ->where('mso_work_plans.id',$request->input('id'))->get();
+        return response()->json($update_plan);                              
+         
+    }
+
 }

@@ -133,6 +133,8 @@ Route::group(['prefix' => 'fm',  'middleware' => 'auth',  'middleware' => 'role:
     
     Route::get('view_mso_plan', 'FmController@view_mso_plan')->name('view_mso_plan');
     Route::post('mso_plan', 'FmController@mso_plan')->name('mso_plan');
+
+    Route::post('edit_mso_plan', 'FmController@edit_mso_plan')->name('edit_mso_plan');
 });
 
 // ZM Route
