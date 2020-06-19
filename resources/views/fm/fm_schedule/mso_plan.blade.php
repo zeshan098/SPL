@@ -91,8 +91,8 @@
             <input name="_token" type="hidden" id="token" value="{{ csrf_token() }}"/>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input class="form-control mso_view_id" type="hidden" name="id">
-                        <label for="heading">Enter Date</label>
+                        <input class="form-control mso_view_id" type="hidden" name="id"> 
+                       <label for="heading">Enter Date</label>
                         <input class="form-control mso_view_date datepicker" name="date" placeholder="Enter Date" required>
                     </div>
                     <div class="form-group">
@@ -197,10 +197,8 @@ $(document).on( "click", '.edit_button',function(e) {
           $.ajax({
               url :"{{ url('fm/mso_get_value') }}",
               data:{id : id},
-              type:'POST', 
-              headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-     },
+              type:'get', 
+               
               success:function(response) {
                 $.each(response, function(i, item) { 
                 var second_date = moment(item.date).format('DD-MM-YYYY');
@@ -216,10 +214,26 @@ $(document).on( "click", '.edit_button',function(e) {
         
 });
 </script>
-
+<!-- <script>
+$(document).on( "click", '.edit_button',function(e) {
+    var date = $(this).data('date');
+    var area = $(this).data('area');
+    var mso_id = $(this).data('mso_id');
+    var contact_point = $(this).data('contact_point');
+    var time = $(this).data('time');
+    var id = $(this).data('id');
+    $(".mso_view_date").val(date);
+    $(".mso_view_area").val(area);
+    $(".mso_view_mso_id").val(mso_id);
+    $(".mso_view_contact_point").val(contact_point);
+    $(".mso_view_time").val(time);
+    $(".mso_view_id").val(id);    
+});
+</script> -->
 <script>
 $('body').on('submit','#contactFormDriver',function(e){
-
+    var $ele = $(this).parent().parent();
+        var id= $(this).val();
 e.preventDefault();
 $.ajax({
     url : "{{ url('fm/edit_mso_plan') }}",
