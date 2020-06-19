@@ -1584,7 +1584,7 @@ class FmController extends Controller
             $mso_id->contact_point = $request->input('contact_point')[$key];
             $mso_id->time = $request->input('time')[$key];
             $mso_id->fm_id =$ccrsid;
-            $mso->status = '1';
+            $mso_id->status = '1';
             $mso_id->save();
         }
         return redirect('fm/monthly_work_plan');
