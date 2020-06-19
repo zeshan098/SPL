@@ -50,7 +50,7 @@
                                     data-time="{{ $mso_lists->time}}" 
                                     data-id="{{ $mso_lists->id}}">
                                     Edit
-                                  </button>
+                                  </button> | <button class='delete btn btn-primary btn-xs btn-danger' id='del_{{$mso_lists->id}}' data-id='{{$mso_lists->id}}' >Delete</button>
                                 </td>
                                 
                             </tr>
@@ -155,6 +155,7 @@
 <script src="{{ asset("bower_components/datepicker/daterangepicker.js") }}"></script>
 <script src="{{ asset("bower_components/moment/moment.js") }}"></script> 
 <script src="{{ asset("bower_components/datepicker/bootstrap-datetimejs.js") }}"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script> 
  
 <!-- page script -->
 <script>
@@ -268,5 +269,45 @@ $.ajax({
 });
 });
  
+</script>
+<script>
+$(document).ready(function(){
+
+// Delete 
+$('.delete').click(function(){
+  var el = this;
+
+  // Delete id
+  var deleteid = $(this).data('id');
+
+  // Confirm box
+  bootbox.confirm("Do you really want to delete record?", function(result) {
+
+     if(result){
+       // AJAX Request
+       $.ajax({
+         url:  "{{ url('fm/delte_mso_plan') }}",
+         type: 'POST',
+         data: { id:deleteid },
+         success: function(response){
+
+           // Removing row from HTML Table
+           if(response == 1){
+      $(el).closest('tr').css('background','tomato');
+              $(el).closest('tr').fadeOut(800,function(){
+         $(this).remove();
+      });
+       }else{
+      bootbox.alert('Record not deleted.');
+       }
+
+         }
+       });
+     }
+
+  });
+
+});
+});
 </script>
 @endsection
