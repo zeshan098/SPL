@@ -286,9 +286,12 @@ $('.delete').click(function(){
      if(result){
        // AJAX Request
        $.ajax({
-         url:  "{{ url('fm/delte_mso_plan') }}",
+         url:  "{{ url('fm/delete_mso_plan') }}",
          type: 'POST',
          data: { id:deleteid },
+         headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+     },
          success: function(response){
 
            // Removing row from HTML Table

@@ -1681,10 +1681,11 @@ class FmController extends Controller
 
 
     public function delete_mso_plan(Request $request){
+        
         $update_mso_plan = DB::table('mso_work_plans')->where('id', $request->input('id'))
                             ->update([ 'status'=> '0'
                                        ]);
-
+        return response()->json(1); 
     }
 
 }

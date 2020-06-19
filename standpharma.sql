@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2020 at 06:17 AM
+-- Generation Time: Jun 19, 2020 at 11:28 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -4754,6 +4754,37 @@ INSERT INTO `items_teams` (`id`, `item_code`, `team_id`, `year_id`, `lock_yn`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mso_work_plans`
+--
+
+CREATE TABLE `mso_work_plans` (
+  `id` bigint(6) UNSIGNED NOT NULL,
+  `date` date DEFAULT NULL,
+  `area` varchar(100) DEFAULT NULL,
+  `mso_id` varchar(20) DEFAULT NULL,
+  `contact_point` varchar(100) DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  `fm_id` varchar(20) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mso_work_plans`
+--
+
+INSERT INTO `mso_work_plans` (`id`, `date`, `area`, `mso_id`, `contact_point`, `time`, `fm_id`, `status`) VALUES
+(1, '2020-06-30', 'johar town', '1101', 'H market', '12:04 PM', '5400', '1'),
+(2, '2020-06-19', 'Kalma Chowk', '1101', 'dafaze', '6:09 AM', '5400', '1'),
+(3, '2020-06-27', 'gulbergasasd', '1101', 'sfsagd', '8:05 AM', '5400', '1'),
+(4, '2020-06-19', 'Wapda figure', '1101', 'bazar', '1:01 PM', '5400', '1'),
+(5, '2020-06-20', 'Model Town', '1102', 'J1 block', '1:26 PM', '5400', '1'),
+(6, '2020-06-20', 'Gulbergs', '1102', 'G1s', '4:26 PM', '5400', '1'),
+(7, '2020-06-20', 'shadbagh gol chkar', '1101', 'T block', '1:48 PM', '5400', '1'),
+(8, '2020-06-30', 'Kalma Chowk', '1101', 'S Block', '12:48 PM', '5400', '1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `qualifications`
 --
 
@@ -5484,6 +5515,12 @@ ALTER TABLE `items_teams`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `mso_work_plans`
+--
+ALTER TABLE `mso_work_plans`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `qualifications`
 --
 ALTER TABLE `qualifications`
@@ -5649,6 +5686,12 @@ ALTER TABLE `items`
 --
 ALTER TABLE `items_teams`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+
+--
+-- AUTO_INCREMENT for table `mso_work_plans`
+--
+ALTER TABLE `mso_work_plans`
+  MODIFY `id` bigint(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `qualifications`
