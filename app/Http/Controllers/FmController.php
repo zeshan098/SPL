@@ -1650,6 +1650,15 @@ class FmController extends Controller
                ->with('zmccrsid', $absent_id);
 
     }
+    public function mso_get_value(Request $request){
+        
+        $a  =  $request->input('id');
+        $mso_value = DB::select(" select date,area,mso_id,contact_point,time 
+        from mso_work_plans           
+        where id = $a ");
+        return response()->json($mso_value);                              
+         
+    }
 
     public function edit_mso_plan(Request $request){
         $date = str_replace('/', '-',$request->input('date') );

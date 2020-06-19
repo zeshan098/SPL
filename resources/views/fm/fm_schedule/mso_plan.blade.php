@@ -192,12 +192,28 @@ $(document).on( "click", '.edit_button',function(e) {
     var time = $(this).data('time');
     var id = $(this).data('id');
 
-    $(".mso_view_date").val(date);
-    $(".mso_view_area").val(area);
-    $(".mso_view_mso_id").val(mso_id);
-    $(".mso_view_contact_point").val(contact_point);
-    $(".mso_view_time").val(time);
-    $(".mso_view_id").val(id);    
+    // var id = $(this).attr('relid'); //get the attribute value
+          
+          $.ajax({
+              url :"{{ url('fm/mso_get_value') }}",
+              data:{id : id},
+              type:'POST', 
+              headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+     },
+              success:function(response) {
+                $.each(response, function(i, item) { 
+                var second_date = moment(item.date).format('DD-MM-YYYY');
+                $(".mso_view_date").val(second_date);
+                $(".mso_view_area").val(item.area);
+                $(".mso_view_mso_id").val(item.mso_id);
+                $(".mso_view_contact_point").val(item.contact_point);
+                $(".mso_view_time").val(item.time);
+                $(".mso_view_id").val(item.id);
+            });
+            }
+          }); 
+        
 });
 </script>
 
