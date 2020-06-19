@@ -155,7 +155,7 @@
 <script src="{{ asset("bower_components/datepicker/daterangepicker.js") }}"></script>
 <script src="{{ asset("bower_components/moment/moment.js") }}"></script> 
 <script src="{{ asset("bower_components/datepicker/bootstrap-datetimejs.js") }}"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script> 
+<script src=" {{ asset("bower_components/bootbox/bootbox.min.js") }}"></script> 
  
 <!-- page script -->
 <script>
