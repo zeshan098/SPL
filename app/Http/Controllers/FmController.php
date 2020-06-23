@@ -1608,7 +1608,7 @@ class FmController extends Controller
         }
         $data['page_title'] = "View MSO Plan";
         return view('fm.fm_schedule.view_mso_pan')->with($data)
-        ->with('zmccrsid', $absent_id);
+        ->with('zmccrsid', $absent_id); 
     }
 
     public function mso_plan(Request $request){
@@ -1641,7 +1641,7 @@ class FmController extends Controller
                                     where date BETWEEN '".$from_date."'  And  '".$to_date."'
                                     and mso_id = $mso_id
                                     and status = '1'
-                                    order by id ASC "); 
+                                    order by date ASC "); 
          
         $data['mso_lists'] = $mso_lists;
         
@@ -1686,6 +1686,118 @@ class FmController extends Controller
                             ->update([ 'status'=> '0'
                                        ]);
         return response()->json(1); 
+    }
+
+    public function mso_plan_report(){
+        $ccrsid = Auth::user()->ccrsid;
+        $todayDate = date("Y-m-d");  
+        $zmccrsid = \DB::table('absents')
+                    ->select('absent_ccrsid')
+                    ->where('assign_ccrsid', $ccrsid)
+                    ->where(TRIM('absents.from_date'), '<=', TRIM($todayDate))
+                    ->where(TRIM('absents.to_date'), '>=', TRIM($todayDate))->first();    
+         
+        if($zmccrsid == null){
+             
+            $absent_id = 0;
+        }else{
+        
+            $absent_id = $zmccrsid->absent_ccrsid;
+        }
+        $data['page_title'] = "View MSO Plan";
+        return view('fm.fm_schedule.mso_plan_report')->with($data)
+        ->with('zmccrsid', $absent_id); 
+    }
+
+    public function mso_view_plan_report(Request $request){
+         
+        $ccrsid = Auth::user()->ccrsid; 
+        $todayDate = date("Y-m-d");  
+        $zmccrsid = \DB::table('absents')
+                    ->select('absent_ccrsid')
+                    ->where('assign_ccrsid', $ccrsid)
+                    ->where(TRIM('absents.from_date'), '<=', TRIM($todayDate))
+                    ->where(TRIM('absents.to_date'), '>=', TRIM($todayDate))->first();    
+         
+        if($zmccrsid == null){
+             
+            $absent_id = 0;
+        }else{
+        
+            $absent_id = $zmccrsid->absent_ccrsid;
+        }
+
+        $date = str_replace('/', '-',$request->input('from_date') );
+        $from_date = date("Y-m-d", strtotime($date));
+
+        $dates = str_replace('/', '-',$request->input('to_date') );
+        $to_date = date("Y-m-d", strtotime($dates));
+
+        $mso_id = $request->input('mso_id');
+
+        $mso_lists = DB::select("select * from mso_work_plans
+                                    where date BETWEEN '".$from_date."'  And  '".$to_date."'
+                                    and mso_id = $mso_id
+                                    and status = '1'
+                                    order by date ASC "); 
+
+        $mso_date_list = DB::select("select * from 
+        (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
+         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+         (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
+        where selected_date between '".$from_date."'  And  '".$to_date."' "); 
+         
+        $data['mso_lists'] = $mso_lists;
+        
+        return view('fm.fm_schedule.mso_view_plan_report')->with($data)
+               ->with('mso_lists', $mso_lists)
+               ->with('from_date', $from_date)
+               ->with('to_date', $to_date)
+               ->with('mso_id', $mso_id)
+               ->with('zmccrsid', $absent_id)
+               ->with('mso_date_list', $mso_date_list);
+         
+
+    }
+
+    public function generate_plan_pdf(Request $request)
+    {    
+         
+        $ccrsid = Auth::user()->ccrsid; 
+        $todayDate = date("Y-m-d");  
+        $zmccrsid = \DB::table('absents')
+                    ->select('absent_ccrsid')
+                    ->where('assign_ccrsid', $ccrsid)
+                    ->where(TRIM('absents.from_date'), '<=', TRIM($todayDate))
+                    ->where(TRIM('absents.to_date'), '>=', TRIM($todayDate))->first();    
+         
+        if($zmccrsid == null){
+             
+            $absent_id = 0;
+        }else{
+        
+            $absent_id = $zmccrsid->absent_ccrsid;
+        }
+        $from_date = $request->input('from_date'); 
+        $to_date = $request->input('to_date');
+
+        $mso_id = $request->input('mso_id');
+
+        $mso_lists = DB::select("select * from mso_work_plans
+                                    where date BETWEEN '".$from_date."'  And  '".$to_date."'
+                                    and mso_id = $mso_id
+                                    and status = '1'
+                                    order by date ASC ");
+        // dd($mso_lists); 
+         
+        $pdf = PDF::loadView('fm.fm_schedule.plan_pdf', ['mso_lists'  => $mso_lists,'zmccrsid' => $absent_id ]); 
+        //dd($pdf);
+        
+        return $pdf->download('standpharm.pdf');
+     
     }
 
 }

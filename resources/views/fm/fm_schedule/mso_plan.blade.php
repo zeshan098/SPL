@@ -286,27 +286,27 @@ $('.delete').click(function(){
      if(result){
        // AJAX Request
        $.ajax({
-         url:  "{{ url('fm/delete_mso_plan') }}",
-         type: 'POST',
-         data: { id:deleteid },
-         headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-     },
-         success: function(response){
+                url:  "{{ url('fm/delete_mso_plan') }}",
+                type: 'POST',
+                data: { id:deleteid },
+                headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                success: function(response){
 
-           // Removing row from HTML Table
-           if(response == 1){
-      $(el).closest('tr').css('background','tomato');
-              $(el).closest('tr').fadeOut(800,function(){
-         $(this).remove();
-      });
-       }else{
-      bootbox.alert('Record not deleted.');
-       }
+                // Removing row from HTML Table
+                    if(response == 1){
+                        $(el).closest('tr').css('background','tomato');
+                                $(el).closest('tr').fadeOut(800,function(){
+                            $(this).remove();
+                        });
+                        }else{
+                        bootbox.alert('Record not deleted.');
+                    }
 
-         }
-       });
-     }
+                }
+            });
+    }
 
   });
 

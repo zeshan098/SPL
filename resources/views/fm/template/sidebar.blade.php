@@ -38,10 +38,21 @@
                 <a href="{{ url('fm/reject_case_lists') }}"><i class="fa fa-group"></i> <span>Rejected / Returned Cases</span></a>
                 <a href="{{ url('fm/fm_escalation_record') }}"><i class="fa fa-group"></i> <span>Absence</span></a>
                 <a href="{{ url('fm/fm_team_list') }}"><i class="fa fa-group"></i> <span>Add Team</span></a>
-                <a href="{{ url('fm/monthly_work_plan') }}"><i class="fa fa-group"></i> <span>Monthly Work Plan</span></a>
-                <a href="{{ url('fm/view_mso_plan') }}"><i class="fa fa-group"></i> <span>View Plan</span></a>
             </li>
-             
+            <li class="{{ $controller_name == "FmController" ? 'active' : '' }} treeview">
+                <a href="#"><i class="fa fa-group"></i> <span>Work Plan</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu"> 
+                    <li class="{{ $action_name == "monthly_work_plan" ? 'active' : '' }}"><a href="{{ url('fm/monthly_work_plan') }}">Monthly Work Plan</a></li> 
+                    <li class="{{ $action_name == "view_mso_plan" ? 'active' : '' }}"><a href="{{ url('fm/view_mso_plan') }}">View Plan</a></li> 
+                    <li class="{{ $action_name == "mso_plan_report" ? 'active' : '' }}"><a href="{{ url('fm/mso_plan_report') }}">Plan Report</a></li>
+                     
+                
+                </ul>
+            </li>  
              
             @if($zmccrsid != 0)
             <li class="{{ $controller_name == "FmController" ? 'active' : '' }} treeview">

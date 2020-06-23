@@ -136,6 +136,9 @@ Route::group(['prefix' => 'fm',  'middleware' => 'auth',  'middleware' => 'role:
     Route::get('mso_get_value', 'FmController@mso_get_value')->name('mso_get_value');
     Route::post('edit_mso_plan', 'FmController@edit_mso_plan')->name('edit_mso_plan');
     Route::post('delete_mso_plan', 'FmController@delete_mso_plan')->name('delete_mso_plan');
+    Route::get('mso_plan_report', 'FmController@mso_plan_report')->name('mso_plan_report');
+    Route::post('mso_view_plan_report', 'FmController@mso_view_plan_report')->name('mso_view_plan_report');
+    Route::post('generate_plan_pdf','FmController@generate_plan_pdf')->name('generate_plan_pdf-pdf');
 });
 
 // ZM Route
