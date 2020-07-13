@@ -201,17 +201,17 @@ $(document).on( "click", '.edit_button',function(e) {
               type:'get', 
                
               success:function(response) {
-                $.each(response, function(i, item) { 
-                var second_date = moment(item.date).format('DD-MM-YYYY');
-                $(".mso_view_date").val(second_date);
-                $(".mso_view_area").val(item.area);
-                $(".mso_view_mso_id").val(item.mso_id);
-                $(".mso_view_contact_point").val(item.contact_point);
-                $(".mso_view_time").val(item.time);
-                $(".mso_view_id").val(item.id);
-            });
-            }
-          }); 
+                    $.each(response, function(i, item) { 
+                    var second_date = moment(item.date).format('DD-MM-YYYY');
+                    $(".mso_view_date").val(second_date);
+                    $(".mso_view_area").val(item.area);
+                    $(".mso_view_mso_id").val(item.mso_id);
+                    $(".mso_view_contact_point").val(item.contact_point);
+                    $(".mso_view_time").val(item.time);
+                    $(".mso_view_id").val(item.id);
+                });
+             }
+        }); 
         
 });
 </script>
@@ -243,7 +243,7 @@ $.ajax({
     contentType: false,       
     cache: false,             
     processData:false, 
-    headers: {
+    headers: { 
         'X-CSRF-TOKEN': '{{ csrf_token() }}'
      },
     beforeSend: function(){
@@ -274,43 +274,43 @@ $.ajax({
 $(document).ready(function(){
 
 // Delete 
-$('.delete').click(function(){
-  var el = this;
+    $('.delete').click(function(){
+    var el = this;
 
-  // Delete id
-  var deleteid = $(this).data('id');
+    // Delete id
+    var deleteid = $(this).data('id');
 
-  // Confirm box
-  bootbox.confirm("Do you really want to delete record?", function(result) {
+    // Confirm box
+    bootbox.confirm("Do you really want to delete record?", function(result) {
 
-     if(result){
-       // AJAX Request
-       $.ajax({
-                url:  "{{ url('fm/delete_mso_plan') }}",
-                type: 'POST',
-                data: { id:deleteid },
-                headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                success: function(response){
+        if(result){
+        // AJAX Request
+        $.ajax({
+                    url:  "{{ url('fm/delete_mso_plan') }}",
+                    type: 'POST',
+                    data: { id:deleteid },
+                    headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    success: function(response){
 
-                // Removing row from HTML Table
-                    if(response == 1){
-                        $(el).closest('tr').css('background','tomato');
-                                $(el).closest('tr').fadeOut(800,function(){
-                            $(this).remove();
-                        });
-                        }else{
-                        bootbox.alert('Record not deleted.');
+                    // Removing row from HTML Table
+                        if(response == 1){
+                            $(el).closest('tr').css('background','tomato');
+                                    $(el).closest('tr').fadeOut(800,function(){
+                                $(this).remove();
+                            });
+                            }else{
+                            bootbox.alert('Record not deleted.');
+                        }
+
                     }
+                });
+        }
 
-                }
-            });
-    }
+    });
 
-  });
-
-});
+    });
 });
 </script>
 @endsection

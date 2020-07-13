@@ -1791,10 +1791,10 @@ class FmController extends Controller
                                     and mso_id = $mso_id
                                     and status = '1'
                                     order by date ASC ");
-        // dd($mso_lists); 
+         
          
         $pdf = PDF::loadView('fm.fm_schedule.plan_pdf', ['mso_lists'  => $mso_lists,'zmccrsid' => $absent_id ]); 
-        //dd($pdf);
+         
         
         return $pdf->download('standpharm.pdf');
      
