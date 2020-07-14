@@ -77,12 +77,14 @@ class FmController extends Controller
         $ss = oci_parse($users, "SELECT DOCTORID,DOCTORNAME, CITY FROM v_doctor_list_mv
                                      where AMID = $ccrsid 
                                      order by DOCTORID ASC");
+        
         oci_execute($ss);
         
         while($row = oci_fetch_array($ss, OCI_ASSOC)) {
                 $dr_detail[] = $row['DOCTORNAME'];
                 $dr_id[] = $row['DOCTORID'];
         }
+        
         $data['case'] = $case;
         $request->session()->forget('case_id');
         
@@ -679,19 +681,17 @@ class FmController extends Controller
     public function dr_name(Request $request)
     {
         $ccrsid = Auth::user()->ccrsid;
-        $dr_name = $request->input('dr_name'); 
-        
+        $dr_name = $request->input('dr_name');  
         $users = oci_connect('ccrs', 'ARIKONS', '(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = 10.10.1.18)(PORT = 1521)) (CONNECT_DATA = (SERVICE_NAME = ORCL)))');
          
-        $fm_dr_name = oci_parse($users, "SELECT DOCTORID FROM v_doctor_list
+        $fm_dr_name = oci_parse($users, "SELECT DOCTORID FROM v_doctor_list_mv
                                             where AMID = '$ccrsid'
-                                            and  DOCTORNAME = '$dr_name' ");
+                                            and  DOCTORNAME = '$dr_name' "); 
         oci_execute($fm_dr_name);
         
         while($row = oci_fetch_array($fm_dr_name, OCI_ASSOC)) { 
                 $dr_id = $row; 
-        }
-         
+        } 
         return response()->json($dr_id);
          
     }
